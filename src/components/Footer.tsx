@@ -9,9 +9,16 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">CarbonCalc</h3>
+            <div className="flex items-center space-x-2 mb-3">
+              <img 
+                src="/lovable-uploads/6bc84c3b-71f6-4c55-9807-1566a1ae2ddd.png" 
+                alt="TuringFin Logo" 
+                className="h-10 w-10"
+              />
+              <h3 className="text-lg font-semibold text-gray-800">TuringFin AI</h3>
+            </div>
             <p className="text-gray-600 mb-4">
-              Helping cleantech companies estimate their carbon credits with precision.
+              Empowering cleantech companies to quantify and monetize their carbon credits.
             </p>
           </div>
           
@@ -60,7 +67,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-200 mt-8 pt-6 text-center">
           <p className="text-gray-600 text-sm">
-            &copy; {currentYear} CarbonCalc. All rights reserved. This calculator provides estimates only.
+            &copy; {currentYear} TuringFin AI. All rights reserved. Carbon credit calculations are estimates.
           </p>
         </div>
       </div>

@@ -22,7 +22,12 @@ const NavBar = () => {
     <nav className="bg-white shadow-sm py-4 px-6 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
-          <span className="text-green-700 font-bold text-xl">CarbonCalc</span>
+          <img 
+            src="/lovable-uploads/6bc84c3b-71f6-4c55-9807-1566a1ae2ddd.png" 
+            alt="TuringFin Logo" 
+            className="h-10 w-10"
+          />
+          <span className="text-blue-700 font-bold text-xl">TuringFin</span>
         </Link>
 
         {/* Desktop Navigation */}

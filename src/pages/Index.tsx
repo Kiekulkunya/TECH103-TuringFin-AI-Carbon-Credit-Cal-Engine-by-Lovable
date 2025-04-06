@@ -12,16 +12,16 @@ const Index = () => {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-green-50 to-white py-20 px-6">
+        <section className="bg-gradient-to-b from-blue-50 to-white py-20 px-6">
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                  Calculate Your Carbon Credits with Precision
+                  AI-Powered Carbon Credit Calculation
                 </h1>
                 <p className="text-xl text-gray-600 mb-8">
-                  Our advanced platform helps cleantech companies quantify their environmental impact
-                  and estimate potential carbon credits.
+                  TuringFin AI empowers cleantech companies to precisely quantify and monetize 
+                  their environmental impact through advanced carbon credit estimation.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link to="/calculator">
@@ -38,19 +38,23 @@ const Index = () => {
               </div>
               <div className="hidden md:flex justify-center">
                 <div className="relative w-full max-w-md">
-                  <div className="absolute inset-0 bg-green-100 rounded-full blur-3xl opacity-30"></div>
+                  <div className="absolute inset-0 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
                   <div className="relative bg-white p-8 rounded-xl shadow-lg">
-                    <div className="flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-6">
-                      <Leaf className="h-10 w-10 text-green-600" />
+                    <div className="flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-6">
+                      <img 
+                        src="/lovable-uploads/6bc84c3b-71f6-4c55-9807-1566a1ae2ddd.png" 
+                        alt="TuringFin Logo" 
+                        className="h-12 w-12"
+                      />
                     </div>
-                    <h3 className="text-2xl font-semibold mb-2">Turn Environmental Impact into Value</h3>
+                    <h3 className="text-2xl font-semibold mb-2">Transform Impact into Value</h3>
                     <p className="text-gray-600 mb-4">
-                      Quantify your sustainability efforts and discover their potential financial worth
-                      in the carbon market.
+                      Leverage AI to convert your sustainability efforts into measurable 
+                      financial opportunities.
                     </p>
-                    <div className="flex items-center text-green-600 font-medium">
+                    <div className="flex items-center text-blue-600 font-medium">
                       <Zap className="h-5 w-5 mr-2" />
-                      <span>Trusted by leading cleantech companies</span>
+                      <span>Intelligent Carbon Credit Solutions</span>
                     </div>
                   </div>
                 </div>
