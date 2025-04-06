@@ -10,6 +10,10 @@ export interface CleanTechData {
   waterConservation: number; // in gallons
   technologyType: string;
   projectLifespan: number; // in years
+  // New fields for enhanced calculations
+  solarEnergyKwh: number;
+  storageCapacityKwh: number;
+  calculationDate: string;
 }
 
 export interface CarbonCreditResult {
@@ -22,6 +26,9 @@ export interface CarbonCreditResult {
     waste: number;
     water: number;
   };
+  // New fields for tracking
+  calculationId: string;
+  calculationDate: string;
 }
 
 // Constants for calculation (in real scenario these would be more complex)
@@ -31,6 +38,10 @@ const CARBON_INTENSITY_WATER = 0.000264; // kg CO2 per gallon
 
 const CREDIT_CONVERSION_RATE = 0.001; // 1 credit per ton of CO2
 const CREDIT_VALUE = 20; // Value per credit in USD (market dependent)
+
+// New constants for enhanced calculation
+const EMISSION_FACTOR = 0.85; // kg CO2 per kWh avoided by solar
+const STORAGE_FACTOR = 0.15; // Credit multiplier for storage capacity
 
 // Industry multipliers (simplified)
 const INDUSTRY_MULTIPLIERS: Record<string, number> = {
@@ -65,6 +76,17 @@ const SIZE_MULTIPLIERS: Record<string, number> = {
   enterprise: 1.4
 };
 
+// Enhanced calculation logic based on the example provided
+export const computeSolarAndStorageCredits = (solarEnergyKwh: number, storageKwh: number): number => {
+  // Avoided emissions from solar energy
+  const avoidedEmissions = solarEnergyKwh * EMISSION_FACTOR / 1000; // Convert to tons
+  // Additional credits from building storage (e.g., efficiency gains)
+  const storageCredits = storageKwh * STORAGE_FACTOR / 1000; // Convert to tons
+  const totalCredits = avoidedEmissions + storageCredits;
+  
+  return totalCredits;
+};
+
 export const calculateCarbonCredits = (data: CleanTechData): CarbonCreditResult => {
   // Calculate CO2 reductions for each category
   const energySavingsCO2 = data.energySavings * CARBON_INTENSITY_ELECTRICITY / 1000; // Convert to tons
@@ -72,13 +94,17 @@ export const calculateCarbonCredits = (data: CleanTechData): CarbonCreditResult 
   const wasteCO2 = data.wasteReduction * CARBON_INTENSITY_WASTE;
   const waterCO2 = data.waterConservation * CARBON_INTENSITY_WATER / 1000; // Convert to tons
   
+  // Calculate solar and storage credits
+  const solarAndStorageCredits = computeSolarAndStorageCredits(data.solarEnergyKwh, data.storageCapacityKwh);
+  
   // Apply multipliers
   const industryMultiplier = INDUSTRY_MULTIPLIERS[data.industry] || INDUSTRY_MULTIPLIERS.other;
   const technologyMultiplier = TECHNOLOGY_MULTIPLIERS[data.technologyType] || TECHNOLOGY_MULTIPLIERS.other;
   const sizeMultiplier = SIZE_MULTIPLIERS[data.companySize] || SIZE_MULTIPLIERS.small;
   
   // Calculate total CO2 reduction with multipliers
-  const totalCO2Reduction = (energySavingsCO2 + renewableEnergyCO2 + wasteCO2 + waterCO2) * 
+  const baseCO2Reduction = (energySavingsCO2 + renewableEnergyCO2 + wasteCO2 + waterCO2);
+  const totalCO2Reduction = (baseCO2Reduction + solarAndStorageCredits) * 
                             industryMultiplier * 
                             technologyMultiplier * 
                             sizeMultiplier;
@@ -91,7 +117,7 @@ export const calculateCarbonCredits = (data: CleanTechData): CarbonCreditResult 
   const financialValue = totalCreditsLifespan * CREDIT_VALUE;
   
   // Calculate category breakdown (percentages)
-  const energyCO2 = (energySavingsCO2 + renewableEnergyCO2) * 
+  const energyCO2 = (energySavingsCO2 + renewableEnergyCO2 + solarAndStorageCredits) * 
                     industryMultiplier * 
                     technologyMultiplier * 
                     sizeMultiplier;
@@ -106,6 +132,9 @@ export const calculateCarbonCredits = (data: CleanTechData): CarbonCreditResult 
                           technologyMultiplier * 
                           sizeMultiplier;
   
+  // Generate unique ID for this calculation
+  const calculationId = generateUniqueId();
+  
   return {
     totalCredits: Math.round(totalCreditsLifespan),
     annualCredits: Math.round(annualCredits),
@@ -115,8 +144,54 @@ export const calculateCarbonCredits = (data: CleanTechData): CarbonCreditResult 
       energy: Math.round((energyCO2 / totalCO2Reduction) * 100),
       waste: Math.round((wasteCO2Adjusted / totalCO2Reduction) * 100),
       water: Math.round((waterCO2Adjusted / totalCO2Reduction) * 100)
-    }
+    },
+    calculationId,
+    calculationDate: data.calculationDate || new Date().toISOString().split('T')[0]
   };
+};
+
+// Generate unique ID for calculations
+const generateUniqueId = (): string => {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2, 5).toUpperCase();
+};
+
+// Storage utilities for historical data
+export const saveCalculationResult = (data: CleanTechData, result: CarbonCreditResult): void => {
+  try {
+    // Get existing calculations
+    const storedData = localStorage.getItem('carbonCalculations');
+    const calculations = storedData ? JSON.parse(storedData) : [];
+    
+    // Add new calculation
+    calculations.push({
+      calculationId: result.calculationId,
+      calculationDate: result.calculationDate,
+      companySize: data.companySize,
+      industry: data.industry,
+      technologyType: data.technologyType,
+      projectLifespan: data.projectLifespan,
+      totalCredits: result.totalCredits,
+      annualCredits: result.annualCredits,
+      financialValue: result.financialValue,
+      co2Reduction: result.co2Reduction
+    });
+    
+    // Store updated calculations
+    localStorage.setItem('carbonCalculations', JSON.stringify(calculations));
+  } catch (error) {
+    console.error('Error saving calculation:', error);
+  }
+};
+
+// Get historical calculations
+export const getHistoricalCalculations = () => {
+  try {
+    const storedData = localStorage.getItem('carbonCalculations');
+    return storedData ? JSON.parse(storedData) : [];
+  } catch (error) {
+    console.error('Error retrieving calculations:', error);
+    return [];
+  }
 };
 
 // Format numbers for display
@@ -132,4 +207,20 @@ export const formatCurrency = (amount: number): string => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
   }).format(amount);
+};
+
+// Get trend data in format suitable for charts
+export const getTrendData = () => {
+  const calculations = getHistoricalCalculations();
+  if (calculations.length === 0) return null;
+  
+  // Sort by date
+  calculations.sort((a: any, b: any) => new Date(a.calculationDate).getTime() - new Date(b.calculationDate).getTime());
+  
+  return calculations.map((calc: any) => ({
+    date: calc.calculationDate,
+    totalCredits: calc.totalCredits,
+    financialValue: calc.financialValue,
+    co2Reduction: calc.co2Reduction
+  }));
 };

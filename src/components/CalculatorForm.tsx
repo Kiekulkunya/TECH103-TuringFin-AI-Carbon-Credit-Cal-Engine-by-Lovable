@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 interface CalculatorFormProps {
   onCalculate: (data: CleanTechData) => void;
@@ -23,7 +23,10 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
     wasteReduction: 0,
     waterConservation: 0,
     technologyType: "energyEfficiency",
-    projectLifespan: 10
+    projectLifespan: 10,
+    solarEnergyKwh: 0,
+    storageCapacityKwh: 0,
+    calculationDate: new Date().toISOString().split('T')[0]
   });
 
   const handleChange = (field: keyof CleanTechData, value: string | number) => {
@@ -37,7 +40,8 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
     if (formData.energySavings === 0 && 
         formData.renewableEnergyGenerated === 0 && 
         formData.wasteReduction === 0 && 
-        formData.waterConservation === 0) {
+        formData.waterConservation === 0 &&
+        formData.solarEnergyKwh === 0) {
       toast("Please enter at least one environmental impact value");
       return;
     }
@@ -131,6 +135,16 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
                 onChange={(e) => handleChange("projectLifespan", parseInt(e.target.value) || 0)}
               />
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="calculationDate">Calculation Date</Label>
+              <Input
+                id="calculationDate"
+                type="date"
+                value={formData.calculationDate}
+                onChange={(e) => handleChange("calculationDate", e.target.value)}
+              />
+            </div>
           </div>
 
           <div className="border-t border-gray-200 pt-6">
@@ -157,6 +171,30 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({ onCalculate }) => {
                   value={formData.renewableEnergyGenerated}
                   onChange={(e) => handleChange("renewableEnergyGenerated", parseInt(e.target.value) || 0)}
                   placeholder="e.g., 75000"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="solarEnergyKwh">Solar Energy Production (kWh/year)</Label>
+                <Input
+                  id="solarEnergyKwh"
+                  type="number"
+                  min="0"
+                  value={formData.solarEnergyKwh}
+                  onChange={(e) => handleChange("solarEnergyKwh", parseInt(e.target.value) || 0)}
+                  placeholder="e.g., 100000"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="storageCapacityKwh">Energy Storage Capacity (kWh)</Label>
+                <Input
+                  id="storageCapacityKwh"
+                  type="number"
+                  min="0"
+                  value={formData.storageCapacityKwh}
+                  onChange={(e) => handleChange("storageCapacityKwh", parseInt(e.target.value) || 0)}
+                  placeholder="e.g., 50000"
                 />
               </div>
 

@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import ResultsChart from "@/components/ResultsChart";
 import { CleanTechData, CarbonCreditResult, calculateCarbonCredits } from "@/utils/calculationUtils";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BarChart2 } from "lucide-react";
 
 const Results = () => {
   const location = useLocation();
@@ -27,11 +27,18 @@ const Results = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <h1 className="text-3xl font-semibold mb-4 md:mb-0">Your Carbon Credit Results</h1>
-            <Link to="/calculator">
-              <Button variant="outline" className="flex items-center">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Calculator
-              </Button>
-            </Link>
+            <div className="flex space-x-4">
+              <Link to="/calculator">
+                <Button variant="outline" className="flex items-center">
+                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Calculator
+                </Button>
+              </Link>
+              <Link to="/dashboard">
+                <Button variant="outline" className="flex items-center">
+                  <BarChart2 className="mr-2 h-4 w-4" /> View Dashboard
+                </Button>
+              </Link>
+            </div>
           </div>
           
           <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
@@ -57,6 +64,10 @@ const Results = () => {
                   results.categoryBreakdown.waste >= results.categoryBreakdown.water ?
                   "waste reduction efforts" : "water conservation measures"
                 }.
+              </p>
+              <p>
+                Your solar energy production of {calculationData.solarEnergyKwh.toLocaleString()} kWh/year and storage capacity of {calculationData.storageCapacityKwh.toLocaleString()} kWh 
+                contribute significantly to your overall carbon credit generation.
               </p>
               <p>
                 Remember that these are estimates based on industry standards and your provided data. 
