@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -19,15 +18,15 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-sm py-4 px-6 sticky top-0 z-50">
+    <nav className="bg-[#F2FCE2] shadow-sm py-4 px-6 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <img 
             src="/lovable-uploads/6bc84c3b-71f6-4c55-9807-1566a1ae2ddd.png" 
             alt="TuringFin Logo" 
-            className="h-10 w-10"
+            className="h-10 w-10 object-contain"
           />
-          <span className="text-blue-700 font-bold text-xl">TuringFin</span>
+          <span className="text-black font-bold text-xl">TuringFin</span>
         </Link>
 
         {/* Desktop Navigation */}

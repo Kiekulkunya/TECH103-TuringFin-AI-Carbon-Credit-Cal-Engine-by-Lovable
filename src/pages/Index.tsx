@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
@@ -7,19 +6,19 @@ import { ArrowRight, BarChart2, Leaf, Zap } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#F2FCE2]">
       <NavBar />
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-blue-50 to-white py-20 px-6">
+        <section className="bg-[#F2FCE2] py-20 px-6">
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h1 className="text-4xl md:text-5xl font-bold text-black mb-4">
                   AI-Powered Carbon Credit Calculation
                 </h1>
-                <p className="text-xl text-gray-600 mb-8">
+                <p className="text-xl text-black mb-8">
                   TuringFin AI empowers cleantech companies to precisely quantify and monetize 
                   their environmental impact through advanced carbon credit estimation.
                 </p>
@@ -38,13 +37,12 @@ const Index = () => {
               </div>
               <div className="hidden md:flex justify-center">
                 <div className="relative w-full max-w-md">
-                  <div className="absolute inset-0 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
                   <div className="relative bg-white p-8 rounded-xl shadow-lg">
-                    <div className="flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-6">
+                    <div className="flex items-center justify-center w-20 h-20 bg-green-50 rounded-full mb-6">
                       <img 
                         src="/lovable-uploads/6bc84c3b-71f6-4c55-9807-1566a1ae2ddd.png" 
                         alt="TuringFin Logo" 
-                        className="h-12 w-12"
+                        className="h-12 w-12 object-contain"
                       />
                     </div>
                     <h3 className="text-2xl font-semibold mb-2">Transform Impact into Value</h3>
