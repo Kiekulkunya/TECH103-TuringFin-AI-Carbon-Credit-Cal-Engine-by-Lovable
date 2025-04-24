@@ -1,8 +1,9 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import { ArrowRight, BarChart2 } from "lucide-react";
+import { ArrowRight, BarChart2, Zap } from "lucide-react";
 
 const Index = () => {
   return (
