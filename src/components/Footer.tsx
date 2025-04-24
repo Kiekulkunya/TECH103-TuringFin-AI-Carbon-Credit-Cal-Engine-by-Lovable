@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -66,8 +65,11 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-200 mt-8 pt-6 text-center">
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-600 text-sm mb-2">
             &copy; {currentYear} TuringFin AI. All rights reserved. Carbon credit calculations are estimates.
+          </p>
+          <p className="text-gray-600 text-sm">
+            Copyright of TuringFin. This application is Beta version. The user cannot solely base on the information providing from this engine.
           </p>
         </div>
       </div>

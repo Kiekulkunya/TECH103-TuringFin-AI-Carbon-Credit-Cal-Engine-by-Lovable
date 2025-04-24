@@ -18,7 +18,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-[#F2FCE2] shadow-sm py-4 px-6 sticky top-0 z-50">
+    <nav className="bg-blue-50 shadow-sm py-4 px-6 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <img 
