@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -18,15 +19,15 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-blue-50 shadow-sm py-4 px-6 sticky top-0 z-50">
+    <nav className="bg-white shadow-sm py-4 px-6 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <img 
-            src="/lovable-uploads/6bc84c3b-71f6-4c55-9807-1566a1ae2ddd.png" 
+            src="/lovable-uploads/b995ac2b-9eb4-44ed-be2b-2f8d517398d6.png" 
             alt="TuringFin Logo" 
             className="h-10 w-10 object-contain"
           />
-          <span className="text-black font-bold text-xl">TuringFin</span>
+          <span className="text-gray-900 font-bold text-xl">TuringFin</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -37,8 +38,8 @@ const NavBar = () => {
               to={item.path}
               className={`${
                 location.pathname === item.path
-                  ? "text-primary font-medium"
-                  : "text-gray-600 hover:text-primary"
+                  ? "text-blue-600 font-medium"
+                  : "text-gray-600 hover:text-blue-600"
               } transition-colors duration-200`}
             >
               {item.name}
@@ -69,7 +70,7 @@ const NavBar = () => {
                 to={item.path}
                 className={`${
                   location.pathname === item.path
-                    ? "text-primary font-medium"
+                    ? "text-blue-600 font-medium"
                     : "text-gray-600"
                 } py-2 px-4 hover:bg-gray-50 rounded-md transition-colors duration-200`}
                 onClick={() => setIsMenuOpen(false)}
@@ -85,3 +86,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
