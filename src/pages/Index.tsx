@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
@@ -39,11 +38,11 @@ const Index = () => {
               <div className="hidden md:flex justify-center">
                 <div className="relative w-full max-w-md">
                   <div className="relative bg-white p-6 rounded-xl shadow-lg">
-                    <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
+                    <div className="flex items-center justify-center w-24 h-24 bg-blue-100 rounded-full mb-4">
                       <img 
                         src="/lovable-uploads/b995ac2b-9eb4-44ed-be2b-2f8d517398d6.png" 
                         alt="TuringFin Logo" 
-                        className="h-12 w-12 object-contain"
+                        className="h-20 w-20 object-contain"
                       />
                     </div>
                     <h3 className="text-xl font-semibold mb-2 text-gray-900">Transform Impact into Value</h3>
@@ -126,4 +125,3 @@ const Index = () => {
 };
 
 export default Index;
-

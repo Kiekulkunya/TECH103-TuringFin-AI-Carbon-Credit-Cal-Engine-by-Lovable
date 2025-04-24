@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -25,7 +24,7 @@ const NavBar = () => {
           <img 
             src="/lovable-uploads/b995ac2b-9eb4-44ed-be2b-2f8d517398d6.png" 
             alt="TuringFin Logo" 
-            className="h-10 w-10 object-contain"
+            className="h-16 w-16 object-contain"
           />
           <span className="text-gray-900 font-bold text-xl">TuringFin</span>
         </Link>
@@ -86,4 +85,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
