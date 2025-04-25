@@ -3,6 +3,7 @@ import { useState } from "react";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import CalculatorForm from "@/components/CalculatorForm";
+import DisclaimerDialog from "@/components/DisclaimerDialog";
 import { CleanTechData, CarbonCreditResult, calculateCarbonCredits, saveCalculationResult } from "@/utils/calculationUtils";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -10,6 +11,7 @@ import { BarChart2 } from "lucide-react";
 
 const Calculator = () => {
   const [results, setResults] = useState<CarbonCreditResult | null>(null);
+  const [hasAcceptedDisclaimer, setHasAcceptedDisclaimer] = useState(false);
 
   const handleCalculate = (data: CleanTechData) => {
     const calculatedResults = calculateCarbonCredits(data);
@@ -18,6 +20,20 @@ const Calculator = () => {
     // Save calculation for historical tracking
     saveCalculationResult(data, calculatedResults);
   };
+
+  if (!hasAcceptedDisclaimer) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <NavBar />
+        <main className="flex-grow py-12 bg-gray-50">
+          <div className="container mx-auto px-6">
+            <DisclaimerDialog onAccept={() => setHasAcceptedDisclaimer(true)} />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
