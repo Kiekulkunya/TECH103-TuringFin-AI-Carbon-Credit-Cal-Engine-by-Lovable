@@ -96,6 +96,40 @@ const DisclaimerDialog: React.FC<DisclaimerDialogProps> = ({ onAccept }) => {
                 TuringFin Carbon Cal after changes take effect constitutes acceptance of the revised terms.
               </p>
             </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">8. Data Privacy & Information Protection</h3>
+              <p className="font-medium mb-2">Anonymous by design: TuringFin Carbon Cal does not request or deliberately collect personal names, e-mail addresses, company identifiers, or any other personally identifiable information (PII).</p>
+              
+              <ul className="list-disc pl-5 space-y-2 mb-4">
+                <li>
+                  <strong>Minimal data collection:</strong> We log only non-identifiable usage metrics—such as emission inputs, 
+                  calculated results, and basic interaction data—to monitor performance, improve accuracy, and enhance user experience.
+                </li>
+                <li>
+                  <strong>Aggregated storage:</strong> All records are retained solely in aggregated, hashed, or otherwise 
+                  anonymised form so that individual users cannot be re-identified.
+                </li>
+                <li>
+                  <strong>No commercial sharing:</strong> TuringFin does not sell or rent usage data. Aggregated statistics 
+                  may be shared with research partners or regulators, or disclosed only when legally required.
+                </li>
+                <li>
+                  <strong>Retention and deletion:</strong> Raw, non-identifiable logs are either purged or anonymised within a 
+                  limited period after collection. Aggregated analytics may be retained for historical benchmarking. Users may 
+                  request deletion of any residual raw data linked to their session.
+                </li>
+                <li>
+                  <strong>User diligence:</strong> Please avoid entering PII in any free-text fields. If such information is 
+                  provided inadvertently, it may be automatically redacted or removed in line with our data-minimization policy.
+                </li>
+              </ul>
+              
+              <p>
+                All other sections of the disclaimer remain unchanged. By continuing to use TuringFin Carbon Cal, you acknowledge 
+                and agree to this Data Privacy & Information Protection statement along with the broader Legal Disclaimer.
+              </p>
+            </div>
           </div>
         </ScrollArea>
 
@@ -128,3 +162,4 @@ const DisclaimerDialog: React.FC<DisclaimerDialogProps> = ({ onAccept }) => {
 };
 
 export default DisclaimerDialog;
+
